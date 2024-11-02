@@ -1,14 +1,22 @@
-import { createFileRoute } from "@tanstack/react-router";
+import React from "react";
+
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
-	component: HomeComponent,
+	/**
+	 * Renders the component for the root path.
+	 * @returns The rendered React component.
+	 */
+	component: function () {
+		return <React.Fragment />;
+	},
+	/**
+	 * Executes before the component is loaded.
+	 * Throws a redirect to the "/login" path.
+	 */
+	beforeLoad: function () {
+		throw redirect({
+			to: "/login",
+		});
+	},
 });
-
-function HomeComponent() {
-	return (
-		<div className="p-2">
-			<h3>Welcome Home!</h3>
-			<p>This is the home page.</p>
-		</div>
-	);
-}

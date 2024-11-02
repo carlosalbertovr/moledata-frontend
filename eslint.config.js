@@ -12,7 +12,6 @@ import tseslint from "typescript-eslint";
 
 export default [
 	{
-		extends: ["eslint:recommended", "plugin:react/recommended"],
 		settings: {
 			react: {
 				version: "detect",
@@ -47,10 +46,19 @@ export default [
 		rules: {
 			"react-hooks/exhaustive-deps": 0,
 			"react/prop-types": "off",
-			"react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
-			"react/jsx-filename-extension": [1, { extensions: [".tsx", ".ts"] }],
+			// "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
 			"react/jsx-props-no-spreading": "off",
 			"react/react-in-jsx-scope": "off",
+			"react/jsx-filename-extension": [1, { extensions: [".tsx", ".ts"] }],
+			"react/jsx-sort-props": [
+				"warn",
+				{
+					callbacksLast: true,
+					shorthandFirst: true,
+					noSortAlphabetically: false,
+					reservedFirst: true,
+				},
+			],
 			"prettier/prettier": [
 				"error",
 				{
@@ -110,13 +118,5 @@ export default [
 	{ languageOptions: { globals: globals.browser } },
 	pluginJs.configs.recommended,
 	...tseslint.configs.recommended,
-	pluginReact.configs.flat.recommended,
-	{
-		plugins: {
-			import: eslintPluginImport,
-			"unused-imports": eslintPluginUnused,
-			prettier: eslintPluginPrettier,
-			"react-refresh": reactRefresh,
-		},
-	},
+	// pluginReact.configs.flat.recommended,
 ];
